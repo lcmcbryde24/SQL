@@ -57,17 +57,19 @@ VALUES
     ('Company KK', 'Healthcare', 150.2, 3400, 0, 16, 8, 5.3);
 
 
-
+Find All Companies with the average employee staying more than 3 years and being offered more than 8 weeks of maternity leave.
 SELECT company_name, avg_employee_tenure
 FROM fortune_companies
 WHERE avg_employee_tenure > 3
 AND maternity_leave_weeks >8;
 
+Calculate the Revenue Generated Per Employee of Each Company
 SELECT company_name, revenue
 , ((revenue/employees)*1000000) AS revenue_per_employee
 FROM fortune_companies
 ORDER BY revenue_per_employee;
 
+Create a chart say to buy Tech Stocks, Hold Energy Stocks, and Sell The Others. Label as Stock Status.
 SELECT company_name
 , CASE WHEN industry = "Technology" THEN "Buy"
 WHEN industry = "Energy" THEN "Hold"
@@ -75,6 +77,7 @@ ELSE "Sell"
 END AS "Stock Status"
 FROM fortune_companies;
 
+Rank the Industries From Highest to Lowest By Their Average Revenue Numbers if above 100M
 SELECT company_name, 
 AVG(revenue) AS revenue_performance
 FROM fortune_companies
@@ -82,6 +85,7 @@ GROUP BY industry
 HAVING revenue > 100
 ORDER BY revenue_performance;
 
+Display the correlation between no healthcare benefits and average employee tenure.
 SELECT company_name, avg_employee_tenure
 FROM fortune_companies
 WHERE healthcare_benefits = 0
